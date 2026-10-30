@@ -1,0 +1,104 @@
+{
+  "bill": {
+    "mailtype": "newbillcmdapproval",
+    "to": ["cmd@example.com"],
+    "cc": ["accounts@example.com"],
+    "data": {
+      "billType": "BILL",
+      "revisionId": "6af1c2000000000000000001",
+      "label": "New Bill – August 2026 to September 2026",
+      "media": {
+        "mediaCode": "155",
+        "mediaName": "Anna Nagar Main Road",
+        "mediaType": "Hoarding",
+        "state": "Tamil Nadu",
+        "city": "Chennai",
+        "location": "Anna Nagar",
+        "fullAddress": "Anna Nagar, Chennai, Tamil Nadu",
+        "width": 40,
+        "height": 20,
+        "totalSqft": 800
+      },
+      "paymentFrequency": "Monthly",
+      "gstApplicable": 1,
+      "gstPercentage": 18,
+      "withGst": 1,
+      "bill": {
+        "months": [
+          { "month": "August 2026", "type": "newBill", "amount": 1200, "gstAmount": 216, "total": 1416 },
+          { "month": "September 2026", "type": "billUpdate", "amount": 1200, "gstAmount": 216, "total": 1416 }
+        ],
+        "totalAmount": 2400,
+        "totalGstAmount": 432,
+        "grandTotal": 2832,
+        "oldRent": 10000,
+        "newRent": 11200,
+        "applyToAllMonths": 1,
+        "nextIncreaseAmount": 1200,
+        "nextBillFromMonth": "October 2026"
+      },
+      "landOwners": [
+        {
+          "name": "Ravi Kumar", "phone": "9876543210", "panNumber": "ABCDE1234F",
+          "paymentCategory": 2, "bankName": "SBI", "accountNumber": "1234567890",
+          "ifsc": "SBIN0001234", "onlineMode": 1, "gstNumber": "33ABCDE1234F1Z5",
+          "shareAmount": 2400, "cashAmount": 0, "onlineAmount": 2400,
+          "gstAmount": 432, "totalAmount": 2832
+        }
+      ],
+      "reason": "Landlord agreed increase from August",
+      "gstInvoiceUrl": "",
+      "approvedBy": "CMD",
+      "approvedAt": "2026-10-30 16:45"
+    }
+  },
+  "advance": {
+    "mailtype": "newbillcmdapproval",
+    "to": ["cmd@example.com"],
+    "data": {
+      "billType": "ADVANCE",
+      "revisionId": "6af1c2000000000000000002",
+      "label": "Advance – April 2027",
+      "media": {
+        "mediaCode": "156",
+        "mediaName": "OMR Junction",
+        "mediaType": "Unipole",
+        "fullAddress": "OMR, Chennai, Tamil Nadu",
+        "width": 30,
+        "height": 15,
+        "totalSqft": 450
+      },
+      "paymentFrequency": "Yearly",
+      "gstApplicable": 0,
+      "gstPercentage": 0,
+      "withGst": 0,
+      "advance": {
+        "advanceMonth": "April 2027",
+        "advanceAmount": 10000,
+        "advanceGstAmount": 0,
+        "grandTotal": 10000,
+        "adjustInMonth": "September 2027",
+        "billAmount": 120000,
+        "balanceAmount": 110000
+      },
+      "landOwners": [
+        {
+          "name": "Lakshmi", "phone": "9000000001", "panNumber": "AAAAA1111A",
+          "paymentCategory": 3, "bankName": "HDFC", "accountNumber": "50100000001",
+          "ifsc": "HDFC0000001", "onlineMode": 2,
+          "shareAmount": 6000, "cashAmount": 2000, "onlineAmount": 4000, "gstAmount": 0, "totalAmount": 6000
+        },
+        {
+          "name": "Murugan", "phone": "9000000002", "panNumber": "BBBBB2222B",
+          "paymentCategory": 2, "bankName": "IOB", "accountNumber": "20000000002",
+          "ifsc": "IOBA0000002", "onlineMode": 1,
+          "shareAmount": 4000, "cashAmount": 0, "onlineAmount": 4000, "gstAmount": 0, "totalAmount": 4000
+        }
+      ],
+      "reason": "Owner asked advance",
+      "gstInvoiceUrl": "",
+      "approvedBy": "CMD",
+      "approvedAt": "2026-10-30 17:10"
+    }
+  }
+}
