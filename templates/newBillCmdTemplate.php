@@ -414,9 +414,9 @@ $NOTE_HOLD    = 'margin:0 0 4px 0; color:#b32032; font-size:11px; line-height:1.
       <?php if ($is_gst_hold && $has_gst): ?>
       <p style="<?= $NOTE_HOLD ?>">GST is on hold.</p>
       <?php endif; ?>
-      <?php if ($approved_by !== '' || $approved_at !== ''): ?>
+      <!-- <?php if ($approved_by !== '' || $approved_at !== ''): ?>
       <p style="<?= $NOTE ?>">Approved by CMD<?= $approved_by !== '' ? ': ' . htmlspecialchars($approved_by) : '' ?><?= $approved_at !== '' ? ' on ' . htmlspecialchars($approved_at) : '' ?>.</p>
-      <?php endif; ?>
+      <?php endif; ?> -->
     </div>
 
     <!-- LANDLORD DETAILS -->
