@@ -17,7 +17,22 @@
         "fullAddress": "Anna Nagar, Chennai, Tamil Nadu",
         "width": 40,
         "height": 20,
-        "totalSqft": 800
+        "totalSqft": 800,
+        "siteCount": 2,
+        "sites": [
+          {
+            "mediaCode": "155", "mediaName": "Anna Nagar Main Road", "mediaType": "Hoarding",
+            "state": "Tamil Nadu", "city": "Chennai", "district": "", "location": "Anna Nagar",
+            "fullAddress": "Anna Nagar, Chennai, Tamil Nadu",
+            "width": 40, "height": 20, "totalSqft": 800, "size": "40 x 20 ft (800 sq.ft)", "status": 1
+          },
+          {
+            "mediaCode": "156", "mediaName": "Anna Nagar 2nd Avenue", "mediaType": "Unipole",
+            "state": "Tamil Nadu", "city": "Chennai", "district": "", "location": "2nd Avenue",
+            "fullAddress": "2nd Avenue, Chennai, Tamil Nadu",
+            "width": 20, "height": 10, "totalSqft": 200, "size": "20 x 10 ft (200 sq.ft)", "status": 2
+          }
+        ]
       },
       "paymentFrequency": "Monthly",
       "gstApplicable": 1,

@@ -27,6 +27,11 @@ $NB_WITH_GST = [
     1 => 'GST Hold',
     2 => 'GST Direct',
 ];
+$NB_MEDIA_STATUS = [
+    1 => 'Active',
+    2 => 'Inactive',
+    3 => 'Hold',
+];
 $NB_ROW_TYPE = [
     'newBill'    => 'New Bill',
     'billUpdate' => 'Bill Increase',
@@ -102,6 +107,39 @@ function nbProcessLandOwners(array $landOwnersRaw) {
     return $rows;
 }
 
+// ─────────────────────────────────────────
+// Site rows: every face / site of the media (data.media.sites[]).
+// Location = full address (location, district, city, state).
+// ─────────────────────────────────────────
+function nbProcessSites(array $sitesRaw) {
+    global $NB_MEDIA_STATUS;
+
+    $rows = [];
+    foreach ($sitesRaw as $i => $s) {
+        if (!is_array($s)) continue;
+        $address = trim((string)($s['fullAddress'] ?? ''));
+        if ($address === '') {
+            $address = implode(', ', array_filter([$s['location'] ?? '', $s['district'] ?? '', $s['city'] ?? '', $s['state'] ?? '']));
+        }
+        $size = trim((string)($s['size'] ?? ''));
+        if ($size === '' && !empty($s['width']) && !empty($s['height'])) {
+            $size = $s['width'] . ' x ' . $s['height'] . ' ft' . (!empty($s['totalSqft']) ? ' (' . $s['totalSqft'] . ' sq.ft)' : '');
+        }
+        $status = (int)($s['status'] ?? 0);
+        $rows[] = [
+            'sno'         => $i + 1,
+            'media_code'  => nbText($s['mediaCode'] ?? ''),
+            'media_name'  => nbText($s['mediaName'] ?? ''),
+            'media_type'  => nbText($s['mediaType'] ?? ''),
+            'size'        => nbText($size),
+            'address'     => nbText($address),
+            // not Active → shown next to the name (inactive faces are listed too)
+            'status_note' => ($status && $status !== 1) ? nbMapVal($NB_MEDIA_STATUS, $status, '') : '',
+        ];
+    }
+    return $rows;
+}
+
 // Subject: "CMD New Bill Approved - <Landowner Name(s)> - <Media Code>"
 //          "CMD Advance Approved - <Landowner Name(s)> - <Media Code>"
 function nbBuildSubject(bool $isAdvance, array $landOwnersRaw, string $mediaCode): string {
@@ -150,6 +188,7 @@ function nbBuildPayload(array $data): array {
         'media_size'        => (!empty($media['width']) && !empty($media['height']))
             ? $media['width'] . ' x ' . $media['height'] . ' ft' . (!empty($media['totalSqft']) ? ' (' . $media['totalSqft'] . ' sq.ft)' : '')
             : '',
+        'sites'             => nbProcessSites(is_array($media['sites'] ?? null) ? $media['sites'] : []),
         'payment_frequency' => trim((string)($data['paymentFrequency'] ?? '')),
         'gst_pct'           => $gstPercentage > 0 ? rtrim(rtrim(number_format($gstPercentage, 2, '.', ''), '0'), '.') : '',
         'with_gst'          => nbMapVal($NB_WITH_GST, $withGst),

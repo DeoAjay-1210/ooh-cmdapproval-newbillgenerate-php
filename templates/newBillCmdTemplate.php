@@ -27,6 +27,8 @@ $media_name        = $payload['media_name']        ?? '';
 $media_type        = $payload['media_type']        ?? '';
 $media_address     = $payload['media_address']     ?? '';
 $media_size        = $payload['media_size']        ?? '';
+$sites             = $payload['sites']             ?? [];
+$is_multi_site     = count($sites) > 1;
 $payment_frequency = $payload['payment_frequency'] ?? '';
 $gst_pct           = $payload['gst_pct']           ?? '';
 $with_gst          = $payload['with_gst']          ?? '';
@@ -205,6 +207,47 @@ $NOTE_HOLD    = 'margin:0 0 4px 0; color:#b32032; font-size:11px; line-height:1.
         <span class="heading-badge" style="<?= $BADGE ?>">MI</span>
         Media Information
       </div>
+      <?php if ($is_multi_site): ?>
+      <!-- MULTIPLE SITES: one row per site / face -->
+      <div style="width:100%; overflow-x:auto;">
+        <table class="responsive-table" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th style="<?= $TABLE_HEAD ?>">S.No</th>
+              <th style="<?= $TABLE_HEAD ?>">Media Code</th>
+              <th style="<?= $TABLE_HEAD ?>">Media Name</th>
+              <th style="<?= $TABLE_HEAD ?>">Media Type</th>
+              <th style="<?= $TABLE_HEAD ?>">Size</th>
+              <th style="<?= $TABLE_HEAD ?>">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($sites as $site): ?>
+            <tr>
+              <td style="<?= $TABLE_CELL ?>"><span class="mobile-label">S.No:</span><?= htmlspecialchars((string)$site['sno']) ?></td>
+              <td style="<?= $TABLE_CELL ?>"><span class="mobile-label">Media Code:</span><span class="no-auto-link"><?= htmlspecialchars($site['media_code']) ?></span></td>
+              <td style="<?= $TABLE_CELL ?> text-align:left;"><span class="mobile-label">Media Name:</span><?= htmlspecialchars($site['media_name']) ?><?php if ($site['status_note'] !== ''): ?> <span style="color:#b32032; font-weight:800;">(<?= htmlspecialchars($site['status_note']) ?>)</span><?php endif; ?></td>
+              <td style="<?= $TABLE_CELL ?>"><span class="mobile-label">Media Type:</span><?= htmlspecialchars($site['media_type']) ?></td>
+              <td style="<?= $TABLE_CELL ?>"><span class="mobile-label">Size:</span><?= htmlspecialchars($site['size']) ?></td>
+              <td style="<?= $TABLE_CELL ?> text-align:left;"><span class="mobile-label">Location:</span><?= htmlspecialchars($site['address']) ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+      <table class="media-grid" role="presentation" style="width:100%; border-collapse:collapse; table-layout:fixed;">
+        <tr>
+          <td style="width:50%; padding:15px 16px; border-right:1px solid #eadfe0; vertical-align:middle;">
+            <div style="<?= $INFO_LABEL ?>">Total Sites</div>
+            <div style="<?= $INFO_VALUE ?>"><?= htmlspecialchars((string)count($sites)) ?></div>
+          </td>
+          <td style="width:50%; padding:15px 16px; vertical-align:middle;">
+            <div style="<?= $INFO_LABEL ?>">Payment Frequency</div>
+            <div style="<?= $INFO_VALUE ?>"><?= htmlspecialchars(nbText($payment_frequency)) ?></div>
+          </td>
+        </tr>
+      </table>
+      <?php else: ?>
       <table class="media-grid" role="presentation" style="width:100%; border-collapse:collapse; table-layout:fixed;">
         <tr>
           <td style="width:50%; padding:15px 16px; border-right:1px solid #eadfe0; border-bottom:1px solid #eadfe0; vertical-align:middle;">
@@ -237,6 +280,7 @@ $NOTE_HOLD    = 'margin:0 0 4px 0; color:#b32032; font-size:11px; line-height:1.
           </td>
         </tr>
       </table>
+      <?php endif; ?>
     </div>
 
     <?php if (!$is_advance): ?>
