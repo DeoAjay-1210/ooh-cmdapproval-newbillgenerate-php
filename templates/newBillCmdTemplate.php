@@ -22,6 +22,7 @@ $payload = $payload ?? [];
 
 $is_advance        = $payload['is_advance']        ?? false;
 $label             = $payload['label']             ?? '';
+$bill_no           = $payload['bill_no']           ?? ''; // ✅ NEW — ADINN OOH bill number
 $media_code        = $payload['media_code']        ?? '';
 $media_name        = $payload['media_name']        ?? '';
 $media_type        = $payload['media_type']        ?? '';
@@ -206,6 +207,9 @@ $NOTE_HOLD    = 'margin:0 0 4px 0; color:#b32032; font-size:11px; line-height:1.
       <div class="section-heading" style="<?= $SECTION_HEAD ?>">
         <span class="heading-badge" style="<?= $BADGE ?>">MI</span>
         Media Information
+        <?php if ($bill_no !== ''): ?>
+        <span class="bill-no" style="float:right; margin-top:6px; color:#17171a; font-size:12px; font-weight:700; letter-spacing:0; text-transform:none;">Bill No: <span class="no-auto-link" style="color:#df1128;"><?= htmlspecialchars($bill_no) ?></span></span>
+        <?php endif; ?>
       </div>
       <?php if ($is_multi_site): ?>
       <!-- MULTIPLE SITES: one row per site / face -->

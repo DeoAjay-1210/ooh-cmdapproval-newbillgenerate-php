@@ -181,6 +181,7 @@ function nbBuildPayload(array $data): array {
     $payload = [
         'is_advance'        => $isAdvance,
         'label'             => trim((string)($data['label'] ?? '')),
+        'bill_no'           => trim((string)($data['billNo'] ?? '')), // ✅ NEW — ADINN OOH bill number
         'media_code'        => trim((string)($media['mediaCode'] ?? '')),
         'media_name'        => trim((string)($media['mediaName'] ?? '')),
         'media_type'        => trim((string)($media['mediaType'] ?? '')),

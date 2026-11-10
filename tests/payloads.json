@@ -6,6 +6,7 @@
     "data": {
       "billType": "BILL",
       "revisionId": "6af1c2000000000000000001",
+      "billNo": "ADNOOHBILL3010202603",
       "label": "New Bill – August 2026 to September 2026",
       "media": {
         "mediaCode": "155",
@@ -73,6 +74,7 @@
     "data": {
       "billType": "ADVANCE",
       "revisionId": "6af1c2000000000000000002",
+      "billNo": "ADNOOHBILL3010202604",
       "label": "Advance – April 2027",
       "media": {
         "mediaCode": "156",
